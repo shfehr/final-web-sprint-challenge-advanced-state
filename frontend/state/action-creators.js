@@ -9,11 +9,15 @@ export const moveCounterClockwise = () => {
   return ({type: types.MOVE_COUNTERCLOCKWISE})
 }
 
+export const setQuiz = () => { 
+  return ({type: types.SET_QUIZ_INTO_STATE})
+}
+
 export function selectAnswer() { }
 
 export function setMessage() { }
 
-export function setQuiz() { }
+
 
 export function inputChange() { }
 
