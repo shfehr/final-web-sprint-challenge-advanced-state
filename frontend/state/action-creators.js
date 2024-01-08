@@ -1,3 +1,4 @@
+import axios from 'axios'
 import * as types from './action-types'
 
 // ❗ You don't need to add extra action creators to achieve MVP
@@ -26,6 +27,16 @@ export function resetForm() { }
 // ❗ Async action creators
 export function fetchQuiz() {
   return function (dispatch) {
+    // dispatch(setQuiz(null))
+    axios.get('http://localhost:9000/api/quiz/next')
+
+         .then(res => {
+          dispatch(setQuiz(res.data))
+          console.log(res.data)
+         })
+         .catch(err => {
+          console.error(err)
+         })
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state

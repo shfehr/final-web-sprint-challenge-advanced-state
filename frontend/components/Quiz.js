@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
+import {connect} from 'react-redux'
+import * as actionCreators from '../state/action-creators'
 
 
-export default function Quiz(props) {
+export function Quiz(props) {
+  const { fetchQuiz, quiz } = props
+
+  useEffect (() => {
+      fetchQuiz()
+  },[])
+
   return (
     <div id="wrapper">
       {
         // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
-        true ? (
+        quiz ? (
           <>
             <h2>What is a closure?</h2>
 
@@ -34,3 +42,9 @@ export default function Quiz(props) {
     </div>
   )
 }
+
+const mapStateToProps = (state) => ({
+  quiz: state.quiz
+})
+
+export default connect(mapStateToProps, actionCreators)(Quiz)
