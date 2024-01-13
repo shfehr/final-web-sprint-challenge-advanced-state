@@ -12,7 +12,7 @@ function wheel(state = initialWheelState, action) {
         return state === 0 ? 5 : state -= 1;        
       }
       default:
-            return(state);
+            return state;
     }
   }
 
@@ -22,7 +22,7 @@ function quiz(state = initialQuizState, action) {
     case(SET_QUIZ_INTO_STATE):
       return action.payload
     default: 
-      return(state)  
+      return state  
   }
 }
 
@@ -32,7 +32,7 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
     case(SET_SELECTED_ANSWER):
       return action.payload
     default:
-      return (state)
+      return state
   }
 }
 
@@ -45,7 +45,7 @@ function infoMessage(state = initialMessageState, action) {
     case(SET_SELECTED_ANSWER):
       return ''
     default: 
-      return(state) 
+      return state 
   }
 }
 
@@ -55,13 +55,14 @@ const initialFormState = {
   newQuestion: '',
 }
 function form(state = initialFormState, action) {
+  console.log(action)
   switch(action.type) {
     case(INPUT_CHANGE):
        return ({...state, [action.payload.id]:action.payload.value})
     case(RESET_FORM):
       return state = initialFormState
     default:
-      return(state)
+      return state
   }
  
 }

@@ -1,22 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import * as actionCreators from '../state/action-creators'
 import { inputChange } from '../state/action-creators'
 
 export function Form(props) {
 
   const { postQuiz, form } = props
-
+  const dispatch = useDispatch()
   const onChange = evt => {
     const newInputValue = evt.target.value
+    const newInputId = evt.target.id
     console.log(evt.target)
-    inputChange(newInputValue)
+    dispatch(inputChange(newInputId, newInputValue))
+    //was missing the dispatch of InputChange above
   }
 
-  const onSubmit = () => {
+  const onSubmit = (evt) => {
+    evt.preventDefault()
     postQuiz(form.newQuestion, form.newTrueAnswer, form.newFalseAnswer)
   }
 
+  const isDisabled = () => {
+
+    //return true or false
+  }
+  
   return (
     <form id="form" onSubmit={onSubmit}>
       <h2>Create New Quiz</h2>
@@ -25,7 +33,7 @@ export function Form(props) {
       <input maxLength={50} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer" />
       <button id="submitNewQuizBtn"
               // disabled = {}
-              onSubmit = {onSubmit}
+              // onSubmit = {onSubmit}
               >Submit new quiz</button>
     </form>
   )
