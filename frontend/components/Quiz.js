@@ -8,12 +8,13 @@ export function Quiz(props) {
   const { selectedAnswer, selectAnswer, postAnswer, fetchQuiz, quiz } = props
 
   const handleSubmit = () => {
-      postAnswer()
+      postAnswer(quiz.quiz_id, selectedAnswer )
   }
 
   useEffect (() => {
       fetchQuiz()
   },[])
+  //creating some logic if quiz is present then don't fetch
 
   return (
     <div id="wrapper">
@@ -45,7 +46,7 @@ export function Quiz(props) {
 
             <button id="submitAnswerBtn"
                     disabled = {selectedAnswer === null} 
-                    onSubmit={handleSubmit}  
+                    onClick = {handleSubmit}  
             >Submit answer</button>
           </>
         ) : 'Loading next quiz...'
@@ -56,7 +57,8 @@ export function Quiz(props) {
 
 const mapStateToProps = (state) => ({
   quiz: state.quiz,
-  selectedAnswer: state.selectedAnswer
+  selectedAnswer: state.selectedAnswer,
+  postAnswer: state.postAnswer
 })
 
 export default connect(mapStateToProps, actionCreators)(Quiz)

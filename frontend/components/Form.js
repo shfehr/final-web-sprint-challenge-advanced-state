@@ -1,15 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../state/action-creators'
+import { inputChange } from '../state/action-creators'
 
 export function Form(props) {
 
-  const onChange = evt => {
+  const { postQuiz, form } = props
 
+  const onChange = evt => {
+    const newInputValue = evt.target.value
+    console.log(evt.target)
+    inputChange(newInputValue)
   }
 
-  const onSubmit = evt => {
-
+  const onSubmit = () => {
+    postQuiz(form.newQuestion, form.newTrueAnswer, form.newFalseAnswer)
   }
 
   return (
@@ -18,9 +23,19 @@ export function Form(props) {
       <input maxLength={50} onChange={onChange} id="newQuestion" placeholder="Enter question" />
       <input maxLength={50} onChange={onChange} id="newTrueAnswer" placeholder="Enter true answer" />
       <input maxLength={50} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer" />
-      <button id="submitNewQuizBtn">Submit new quiz</button>
+      <button id="submitNewQuizBtn"
+              // disabled = {}
+              onSubmit = {onSubmit}
+              >Submit new quiz</button>
     </form>
   )
 }
 
-export default connect(st => st, actionCreators)(Form)
+const mapStateToProps = (state) => ({
+//   quiz: state.quiz,
+  form: state.form
+//   postQuiz: state.postQuiz
+ })
+export default connect(mapStateToProps, actionCreators)(Form)
+
+
