@@ -10,9 +10,9 @@ export function Form(props) {
   
   const dispatch = useDispatch()
 
-  useEffect (() => {
-    !form && isDisabled
-},[])
+//   useEffect (() => {
+//     !form && isDisabled
+// },[])
 
   const onChange = evt => {
     const newInputValue = evt.target.value
