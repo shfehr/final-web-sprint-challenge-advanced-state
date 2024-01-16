@@ -7,13 +7,31 @@ import * as actionCreators from '../state/action-creators'
 export function Quiz(props) {
   const { selectedAnswer, selectAnswer, postAnswer, fetchQuiz, quiz } = props
 
+  // const [localQuiz, setLocalQuiz] = useState(null);
+
   const handleSubmit = () => {
       postAnswer(quiz.quiz_id, selectedAnswer )
   }
 
   useEffect (() => {
-      fetchQuiz()
+      !quiz && fetchQuiz()
   },[])
+
+  // useEffect(() => {
+  //   const fetchQuizData = async () => {
+  //     try {
+  //       const fetchedQuiz = await fetchQuiz();
+  //       setLocalQuiz(fetchedQuiz);
+  //     } catch (error) {
+  //       console.error('Error fetching quiz:', error);
+  //     }
+  //   };
+
+  //   if (!localQuiz) {
+  //     --- if no local quiz then get a new quiz on mount
+  //     fetchQuizData();
+  //   }
+  // }, [localQuiz, fetchQuiz]);
   //creating some logic if quiz is present then don't fetch
 
   return (

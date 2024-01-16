@@ -55,7 +55,7 @@ const initialFormState = {
   newQuestion: '',
 }
 function form(state = initialFormState, action) {
-  console.log(action)
+  // console.log(action)
   switch(action.type) {
     case(INPUT_CHANGE):
        return ({...state, [action.payload.id]:action.payload.value})
